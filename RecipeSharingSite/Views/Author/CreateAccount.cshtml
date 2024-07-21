@@ -1,0 +1,28 @@
+﻿@model AuthorCreationViewModel
+
+
+<div class="totalLogin">
+    <div class="loginBox center">
+        <br />
+        <h5>Create your Account</h5>
+        <p style="color: red">@Model.Error</p>
+        <br />
+        <!--Lets make sure the password is longer than 8 characters and contains a number-->
+        <!--Also make sure a name is longer then 6 characters-->
+        <form method="post">
+            <input asp-for="Author.Name" name ="Name" class="inputBox" placeholder="Name..."/>
+            <br /><br />
+            <input type="password" asp-for="Author.Password" name="Password" class="inputBox" placeholder="Password..." />
+            <br /><br />
+            <input type="password" name="checkPassword" class="inputBox" placeholder="Check Password..." />
+            <br /><br /><br /><br />
+            <input type="submit" class="submitButton" value="Create Account">
+        </form>
+    </div>
+
+    <div class="center">
+        <h1>Already have an account?</h1>
+        <hr />
+        <a asp-action="Login">Login</a>
+    </div>
+</div>

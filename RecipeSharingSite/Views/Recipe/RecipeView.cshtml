@@ -1,0 +1,36 @@
+﻿@model RecipeViewViewModel
+
+
+<h1 class = "text-center">@Model.Recipe.Name</h1>
+<p class="text-center">Author: @ViewData["AuthorName"]</p>
+
+<h5 class="font-italic text-center">@Model.Recipe.Description</h5>
+
+<div class="text-center">
+    @if (Model.Content != null) {
+        @foreach(var item in Model.Content)
+        {
+            if (item.key.Equals("image"))
+            {
+                <img class="center" src="@item.value"/>
+            }
+            else if (item.key.Equals("text"))
+            {
+                <p>@item.value</p>
+            }
+        }
+    }
+</div>
+
+
+<div class="text-center">
+    <p>Calories: @Model.Recipe.Calories</p>
+
+    <h3>Ingredients List:</h3>
+    <ul style="display:flex; justify-content:center; flex-direction:column;align-items: center;list-style-position: inside;">
+        @foreach (string s in @Model.Recipe.IngredientList)
+        {
+            <li>@s</li>
+        }
+    </ul>
+</div>

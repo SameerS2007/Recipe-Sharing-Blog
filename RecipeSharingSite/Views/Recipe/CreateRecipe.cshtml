@@ -1,0 +1,87 @@
+﻿@model RecipeViewModel
+
+@if (Context.Session.GetString("username") != null)
+{
+    <div>
+    <h1 class="center">Recipe Creation Page</h1>
+    <p style="color: red">@Model.Error</p>
+
+    <form method="post">
+        <div style="text-align:center">
+            <input asp-for="Recipe.Name" name="Name" placeholder="Name..." class="creationInputs"/>
+        </div>
+        <hr />
+        <textarea asp-for="Recipe.Description" name="Description" class="description" placeholder="Write the description of your recipe here..." rows="5"></textarea>
+        <br />
+        <label>Paste the link of the image that you want people to see on the home page: </label>
+        <input asp-for="Recipe.ImageUrl" name="ImageUrl" class="creationInputs"/>
+        <br />
+        <h2 class="center">Lets create your page!</h2>
+        <h5 class="center">(The things you add will show up on your page in that order)</h5>
+        <div style="text-align: center">
+            <div id="ContentContainer" style="display:inline;"></div>
+        </div>
+        <div style="display:flex; justify-content: center;">
+            <button class="creationButtons" type="button" onclick="addText()">Add text</button> <button class="creationButtons" type="button" onclick="addImage()">Add image</button>
+        </div>
+        <label>Ingredients List (separated by commas): </label>
+            <input asp-for="Recipe.IngredientList" name="IngredientList" class="creationInputs" />
+        <br />
+        <label>Number of Calories: </label>
+            <input asp-for="Recipe.Calories" name="Calories" class="creationInputs" />
+        <br />
+        <input type="submit" class="creationButtons center">
+    </form>
+    </div>
+}
+else
+{
+    <h1 class="center">You must be logged in to view this page</h1>
+}
+
+<script type="text/javascript">
+    var i = 0;
+    function addText() {
+        var br = document.createElement("br");
+        var contentContainer = document.getElementById('ContentContainer');
+        var keyInput = document.createElement("input");
+        keyInput.type="hidden";
+        keyInput.name = 'KeyList';
+        keyInput.value = "text";
+
+        var valueInput = document.createElement("textarea");
+        valueInput.type = "text";
+        valueInput.placeholder = "Write the text here..."
+        valueInput.name = "ValueList";
+        valueInput.rows = 5;
+        valueInput.cols =100;
+        valueInput.classList.add("description");
+
+        contentContainer.appendChild(valueInput);
+        contentContainer.appendChild(keyInput);
+        contentContainer.appendChild(br);
+        contentContainer.appendChild(br);
+        i++;
+    }
+
+    function addImage() {
+        var br = document.createElement("br");
+        var contentContainer = document.getElementById('ContentContainer');
+        var keyInput = document.createElement("input");
+        keyInput.type = "hidden";
+        keyInput.name = 'KeyList';
+        keyInput.value = "image";
+
+        var valueInput = document.createElement("input");
+        valueInput.type = "text";
+        valueInput.placeholder = "Paste the Link of your image here..."
+        valueInput.name = "ValueList";
+        valueInput.classList.add("creationImageInputs");
+
+        contentContainer.appendChild(valueInput);
+        contentContainer.appendChild(keyInput);
+        contentContainer.appendChild(br);
+        contentContainer.appendChild(br);
+        i++;
+    }
+</script>

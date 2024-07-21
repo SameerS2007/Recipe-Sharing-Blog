@@ -1,0 +1,44 @@
+﻿@model AuthorPageViewModel
+
+<h1 class="text-center">Your Account:</h1>
+<br />
+
+@if (Context.Session.GetString("username") != null)
+{
+    <h4 class="text-center">Username: @Model.Author.Name</h4>
+    <h5 class="text-center">List of Recipes Created:</h5>
+    <br />
+    <div style="display: flex; flex-wrap: wrap;">
+        @foreach (Recipe item in Model.RecipeList)
+        {
+            <div style="block">
+                <div class="recipeBox center">
+                    <img src="@item.ImageUrl" width="500px" />
+                    <div class="containers">
+                        <h4><b><a asp-action="RecipeView" asp-route-id="@item.Id">@item.Name</a></b></h4>
+                        <p>Author: @item.AuthorName</p>
+                        <p>@item.Description</p>
+                        <p>Number of Upvotes: @item.Upvotes</p>
+                    </div>
+                </div>
+                <div style="display:flex; margin-left: 160px">
+
+                    @if (Context.Session.GetString("username") != null)
+                    {
+                        if (Context.Session.GetString("username").Equals(item.AuthorName))
+                        {
+                            <form method="post" asp-controller="Recipe" asp-action="Delete" asp-route-id="@item.Id">
+                                <button type="submit" class="recipeButton">Delete</button>
+                            </form>
+                        }
+                    }
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <h1>You have to login to see your account details</h1>
+}
+

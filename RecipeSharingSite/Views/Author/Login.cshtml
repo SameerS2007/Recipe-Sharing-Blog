@@ -1,0 +1,25 @@
+﻿@model AuthorCreationViewModel
+
+<div class="totalLogin">
+    <div class="loginBox center">
+        <br />
+        <h5 class="center">Login</h5>
+        <p style="color: red">@Model.Error</p>
+        <br />
+
+        <form method="post">
+            <input asp-for="Author.Name" name="Name" class="inputBox" placeholder="Name..."/>
+            <br /><br /><br />
+            <input type="password" asp-for="Author.Password" name="Password" class="inputBox" placeholder="Password..."/>
+            <br /><br /><br />
+            <input type="submit" class="submitButton" value="Login"/>
+        </form>
+    </div>
+
+    <div class="center">
+        <h1>Need an Account?</h1>
+        <hr />
+        <a asp-action="CreateAccount">Create an Account</a>
+    </div>
+
+</div>
